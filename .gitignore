@@ -1,0 +1,4 @@
+# игнорируем расширение class
+out
+.idea
+startjava.iml
