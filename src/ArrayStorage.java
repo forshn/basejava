@@ -2,32 +2,34 @@ import java.util.Arrays;
 
 public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
-    private static int countOfArrays = 0;
+    static int countOfArrays = 0;
 
-    public void saveResume(Resume resume){
-        storage[countOfArrays] = resume;
-        countOfArrays++;
+    public void saveResume(Resume resume) {
+        if (countOfArrays < 10000) {
+            storage[countOfArrays] = resume;
+            countOfArrays++;
+        } else System.out.println("Сохранение резюме невозможно, база переполнена.");
     }
 
-    public Resume getResume(int index){
+    public Resume getResume(int index) {
         return storage[index];
     }
 
-    public void deleteResume(int index){
+    public void deleteResume(int index) {
         storage[index] = null;
         countOfArrays--;
     }
 
-    public int sizeOfStorage(){
-        return countOfArrays;
+    public int sizeOfStorage() {
+        return storage.length;
     }
 
-    public String clearStorage(){
-        Arrays.fill(storage, 0, 10000, 0);
-        return "База данных резюме очищена";
+    public void clearStorage() {
+        Arrays.fill(storage, 0, 9999, null);
+        System.out.println("База данных резюме очищена");
     }
 
-    public String getAllResumes(){
-        return Arrays.toString(Arrays.copyOf(storage,countOfArrays));
+    public String getAllResumes() {
+        return Arrays.toString(Arrays.copyOf(storage, countOfArrays));
     }
 }
