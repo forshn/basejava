@@ -1,35 +1,48 @@
+import sun.security.util.ArrayUtil;
+
 import java.util.Arrays;
 
 public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+    Resume[] storage = new Resume[10000];
     static int countOfArrays = 0;
 
-    public void saveResume(Resume resume) {
-        if (countOfArrays < 10000) {
-            storage[countOfArrays] = resume;
-            countOfArrays++;
-        } else System.out.println("Сохранение резюме невозможно, база переполнена.");
-    }
-
-    public Resume getResume(int index) {
-        return storage[index];
-    }
-
-    public void deleteResume(int index) {
-        storage[index] = null;
-        countOfArrays--;
-    }
-
-    public int sizeOfStorage() {
-        return storage.length;
-    }
-
-    public void clearStorage() {
+    void clear() {
         Arrays.fill(storage, 0, 9999, null);
         System.out.println("База данных резюме очищена");
     }
 
-    public String getAllResumes() {
-        return Arrays.toString(Arrays.copyOf(storage, countOfArrays));
+    void save(Resume r) {
+        if (countOfArrays < 10000) {
+            storage[countOfArrays] = r;
+            countOfArrays++;
+        } else System.out.println("Сохранение резюме невозможно, база переполнена.");
+    }
+
+    Resume get(String uuid) {
+        for (Resume s : storage) {
+            if (uuid.equals(s.toString())) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    void delete(String uuid) {
+        for (Resume s : storage) {
+            if (uuid.equals(s.toString())) {
+                s = null;
+            }
+        }
+        countOfArrays--;
+    }
+
+    Resume[] getAll() {
+        return Arrays.copyOf(storage, countOfArrays);
+    }
+
+    int size() {
+        return countOfArrays;
     }
 }
+
+
