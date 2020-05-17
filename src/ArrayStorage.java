@@ -2,10 +2,10 @@ import java.util.Arrays;
 
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
-    private static int counterOfResumes = 0;
+    private int counterOfResumes = 0;
 
     void clear() {
-        Arrays.fill(storage, 0, 9999, null);
+        Arrays.fill(storage, 0, counterOfResumes, null);
     }
 
     void save(Resume r) {
@@ -25,20 +25,22 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        int bin = 0;
-        for (int i = 0; i < counterOfResumes; i++) {
+        int index = 0;
+        for (int i = index; i < counterOfResumes; i++) {
             if (uuid.equals(storage[i].toString())) {
-                bin = i;
+                index = i;
             }
         }
-        storage[bin] = null;
+        storage[index] = null;
 
-        for (int i = 0; i < counterOfResumes; i++) {
-            if (i > bin) {
+        for (int i = index; i < counterOfResumes; i++) {
+            if (i > index) {
                 storage[i - 1] = storage[i];
             }
         }
-        counterOfResumes--;
+        if (counterOfResumes > 0) {
+            counterOfResumes--;
+        }
     }
 
     Resume[] getAll() {
