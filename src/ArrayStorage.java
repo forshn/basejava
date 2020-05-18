@@ -29,17 +29,10 @@ public class ArrayStorage {
         for (int i = index; i < counterOfResumes; i++) {
             if (uuid.equals(storage[i].toString())) {
                 index = i;
+                storage[index] = null;
+                System.arraycopy(storage, index + 1, storage, index, counterOfResumes - index);
+                counterOfResumes--;
             }
-        }
-        storage[index] = null;
-
-        for (int i = index; i < counterOfResumes; i++) {
-            if (i > index) {
-                storage[i - 1] = storage[i];
-            }
-        }
-        if (counterOfResumes > 0) {
-            counterOfResumes--;
         }
     }
 
