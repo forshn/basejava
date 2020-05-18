@@ -25,7 +25,6 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-
         for (int i = 0; i < counterOfResumes; i++) {
             if (uuid.equals(storage[i].toString())) {
                 storage[i] = null;
