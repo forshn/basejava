@@ -25,12 +25,11 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        int index = 0;
-        for (int i = index; i < counterOfResumes; i++) {
+
+        for (int i = 0; i < counterOfResumes; i++) {
             if (uuid.equals(storage[i].toString())) {
-                index = i;
-                storage[index] = null;
-                System.arraycopy(storage, index + 1, storage, index, counterOfResumes - index);
+                storage[i] = null;
+                System.arraycopy(storage, i + 1, storage, i, counterOfResumes - i);
                 counterOfResumes--;
             }
         }
