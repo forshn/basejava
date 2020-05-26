@@ -12,14 +12,20 @@ public class ArrayStorage {
         Arrays.fill(storage, 0, counterOfResumes, null);
     }
 
+    /*Scanner scan = new Scanner(System.in);
     void update(Resume r) {
-    }
+        if (hasResume(r.toString())) {
+            System.out.println("Enter new Resume");
+            r.setUuid(scan.nextLine());
+            System.out.println("Update has been completed");
+        }
+    }*/
 
     boolean hasResume(String uuid) {
-        boolean hasResume = true;
+        boolean hasResume = false;
         for (int i = 0; i < counterOfResumes; i++) {
             if (uuid.equals(storage[i].toString())) {
-                hasResume = false;
+                hasResume = true;
                 break;
             }
         }
@@ -27,7 +33,7 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        if (!hasResume(r.toString())) {
+        if (hasResume(r.toString())) {
             System.out.println("ERROR: " + r.getUuid() + " already exists");
         } else if (counterOfResumes < storage.length) {
             storage[counterOfResumes] = r;
@@ -36,7 +42,7 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        if (!hasResume(uuid)) {
+        if (hasResume(uuid)) {
             for (int i = 0; i < counterOfResumes; i++) {
                 if (uuid.equals(storage[i].toString())) {
                     return storage[i];
@@ -47,7 +53,7 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        if (!hasResume(uuid)) {
+        if (hasResume(uuid)) {
             for (int i = 0; i < counterOfResumes; i++) {
                 if (uuid.equals(storage[i].toString())) {
                     System.arraycopy(storage, i + 1, storage, i, counterOfResumes - 1);
