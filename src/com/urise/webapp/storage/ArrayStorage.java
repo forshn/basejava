@@ -35,6 +35,7 @@ public class ArrayStorage {
         }
     }
 
+    // Метод, проверяющий наличие резюме в хранилище
     boolean isExistingResume(String uuid) {
         boolean isExistingResume = false;
         for (int i = 0; i < counterOfResumes; i++) {
