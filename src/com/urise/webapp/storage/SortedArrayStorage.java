@@ -8,7 +8,9 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void save(Resume r) {
-        if (size == STORAGE_LIMIT) {
+        if (getIndex(r.getUuid()) != -1) {
+            System.out.println("Resume " + r.getUuid() + " already exist");
+        } else if (size == STORAGE_LIMIT) {
             System.out.println("Storage is overflowed");
         } else if (size < STORAGE_LIMIT) {
             int index = Arrays.binarySearch(storage, 0, size, r);
