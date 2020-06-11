@@ -10,7 +10,7 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected void offsetArray(int index) {
-        System.arraycopy(storage, index + 1, storage, index, size - 1);
+        storage[index] = storage[size - 1];
     }
 
     @Override
