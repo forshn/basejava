@@ -52,12 +52,13 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(uuid);
         if (index < 0) {
             throw new NotExistStorageException(uuid);
-        } else offsetArray(index);
+        }
+        offsetArray(index);
         size--;
     }
 
     public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
+        return Arrays.copyOf(storage,size);
     }
 
     public int size() {
