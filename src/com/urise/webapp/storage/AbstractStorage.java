@@ -7,50 +7,54 @@ import com.urise.webapp.model.Resume;
 public abstract class AbstractStorage implements Storage {
 
     public void update(Resume r) {
-        int index = existedIndex(r.getUuid());
-        updating(r, index);
+        Object resume = existingResume(r.getUuid());
+        updating(r, resume);
     }
 
     public void save(Resume r) {
-        int index = notExistedIndex(r.getUuid());
-        insertResume(r, index);
-    }
-
-    public Resume get(String uuid) {
-        int r = existedIndex(uuid);
-        return getting(uuid);
+        Object resume = nonexistentResume(r.getUuid());
+        saving(r, resume);
     }
 
     public void delete(String uuid) {
-        int index = existedIndex(uuid);
-        deleting(index);
+        Object resume = existingResume(uuid);
+        deleting(resume);
     }
 
-    private int existedIndex(String uuid) {
-        if (!isExist(uuid)) {
+    public Resume get(String uuid) {
+        Object resume = existingResume(uuid);
+        return getting(resume);
+    }
+
+    private boolean isExist(Object resume) {
+        return resume != null;
+    }
+
+    private Object existingResume(String uuid) {
+        Object resume = getResume(uuid);
+        if (!isExist(resume)) {
             throw new NotExistStorageException(uuid);
         }
-        return getIndex(uuid);
+        return resume;
     }
 
-    private int notExistedIndex(String uuid) {
-        if (isExist(uuid)) {
+    private Object nonexistentResume(String uuid) {
+        Object resume = getResume(uuid);
+        if (isExist(resume)) {
             throw new ExistStorageException(uuid);
         }
-        return getIndex(uuid);
+        return resume;
     }
 
-    protected boolean isExist(String uuid) {
-        return getIndex(uuid) != 0;
-    }
+    protected abstract Object getResume(String uuid);
 
-    protected abstract void updating(Resume r, int index);
+    protected abstract void updating(Resume r, Object resume);
 
-    protected abstract void deleting(int index);
+    protected abstract void saving(Resume r, Object resume);
 
-    protected abstract int getIndex(String uuid);
+    protected abstract void deleting(Object resume);
 
-    protected abstract Resume getting(String uuid);
+    public abstract void clear();
 
-    protected abstract void insertResume(Resume r, int index);
+    protected abstract Resume getting(Object resume);
 }
