@@ -6,6 +6,7 @@ import com.urise.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
+
     public void update(Resume r) {
         Object resume = existingResume(r.getUuid());
         updating(r, resume);
@@ -13,7 +14,7 @@ public abstract class AbstractStorage implements Storage {
 
     public void save(Resume r) {
         Object resume = nonexistentResume(r.getUuid());
-        saving(r);
+        saving(r, resume);
     }
 
     public void delete(String uuid) {
@@ -50,7 +51,7 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract void updating(Resume r, Object resume);
 
-    protected abstract void saving(Resume r);
+    protected abstract void saving(Resume r, Object resume);
 
     protected abstract void deleting(Object resume);
 

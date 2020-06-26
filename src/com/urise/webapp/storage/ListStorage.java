@@ -9,7 +9,7 @@ public class ListStorage extends AbstractStorage {
     private List<Resume> list = new ArrayList<>();
 
     @Override
-    protected void saving(Resume r) {
+    protected void saving(Resume r, Object resume) {
         list.add(r);
     }
 
