@@ -13,7 +13,7 @@ public abstract class AbstractStorage implements Storage {
 
     public void save(Resume r) {
         Object resume = nonexistentResume(r.getUuid());
-        saving(r, resume);
+        saving(r);
     }
 
     public void delete(String uuid) {
@@ -50,7 +50,7 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract void updating(Resume r, Object resume);
 
-    protected abstract void saving(Resume r, Object resume);
+    protected abstract void saving(Resume r);
 
     protected abstract void deleting(Object resume);
 
