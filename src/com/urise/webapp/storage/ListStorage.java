@@ -30,7 +30,8 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public Resume[] getAll() {
-        return list.toArray(new Resume[list.size()]);
+        Resume[] r = list.toArray(new Resume[list.size()]);
+        return r;
     }
 
     @Override
@@ -40,11 +41,10 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected Integer getResume(String uuid) {
-        Resume r = new Resume(uuid);
-        if (list.contains(r)){
-            return list.indexOf(r);
-        }
-        return null;
+        Resume resume = new Resume(uuid);
+        if (list.indexOf(resume) == -1) {
+            return null;
+        } return list.indexOf(resume);
     }
 
     @Override

@@ -23,7 +23,6 @@ public class MapStorage extends AbstractStorage {
         map.put(r.getUuid(), r);
     }
 
-
     @Override
     protected void deleting(Object resume) {
         map.remove(resume.toString());

@@ -1,4 +1,4 @@
-package com.urise.webapp.testclasses;
+package com.urise.webapp.utils;
 
 import com.urise.webapp.model.Resume;
 import com.urise.webapp.storage.MapStorage;
