@@ -40,11 +40,18 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
+    protected boolean isExist(Object index) {
+        return index != null;
+    }
+
+    @Override
     protected Integer getResume(String uuid) {
-        Resume resume = new Resume(uuid);
-        if (list.indexOf(resume) == -1) {
-            return null;
-        } return list.indexOf(resume);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return null;
     }
 
     @Override

@@ -9,6 +9,11 @@ public class MapStorage extends AbstractStorage {
     private Map<String, Resume> map = new HashMap<>();
 
     @Override
+    protected boolean isExist(Object index) {
+        return map.containsValue(index);
+    }
+
+    @Override
     protected Object getResume(String uuid) {
         return map.get(uuid);
     }
@@ -18,7 +23,7 @@ public class MapStorage extends AbstractStorage {
         map.replace(r.getUuid(), r);
     }
 
- @Override
+    @Override
     protected void saving(Resume r, Object resume) {
         map.put(r.getUuid(), r);
     }
@@ -35,7 +40,8 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     public Resume[] getAll() {
-        return map.values().toArray(new Resume[map.size()]);
+        Resume r[] = map.values().toArray(new Resume[map.size()]);
+        return r;
     }
 
     @Override

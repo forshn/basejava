@@ -6,7 +6,6 @@ import com.urise.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
-
     public void update(Resume r) {
         Object resume = existingResume(r.getUuid());
         updating(r, resume);
@@ -17,7 +16,7 @@ public abstract class AbstractStorage implements Storage {
         saving(r, resume);
     }
 
-    public void delete(String uuid) {
+     public void delete(String uuid) {
         Object resume = existingResume(uuid);
         deleting(resume);
     }
@@ -27,9 +26,7 @@ public abstract class AbstractStorage implements Storage {
         return getting(resume);
     }
 
-    private boolean isExist(Object resume) {
-        return resume != null;
-    }
+    protected abstract boolean isExist(Object index);
 
     private Object existingResume(String uuid) {
         Object resume = getResume(uuid);
