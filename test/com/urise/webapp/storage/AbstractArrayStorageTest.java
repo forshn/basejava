@@ -7,9 +7,9 @@ import org.junit.Test;
 
 public abstract class AbstractArrayStorageTest extends AbstractStorageTest {
 
-     public AbstractArrayStorageTest(Storage storage){
-         super(storage);
-     }
+    public AbstractArrayStorageTest(Storage storage) {
+        super(storage);
+    }
 
     @Test(expected = StorageException.class)
     public void overflow() throws Exception {
