@@ -21,6 +21,8 @@ public abstract class AbstractStorageTest {
     private static final Resume RESUME_2;
     private static final Resume RESUME_3;
 
+
+
     static {
         RESUME_1 = new Resume(UUID_1);
         RESUME_2 = new Resume(UUID_2);
@@ -64,9 +66,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAll() throws Exception {
-        Resume[] actualResumes = storage.getAll();
+        Resume[] actualResumes = new Resume[]{RESUME_1, RESUME_2, RESUME_3};
         assertEquals(3, actualResumes.length);
-        assertArrayEquals(new Resume[]{RESUME_1, RESUME_2, RESUME_3}, actualResumes);
+        assertArrayEquals(actualResumes, storage.getAll());
     }
 
     @Test
@@ -95,8 +97,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void get() throws Exception {
-        Resume resume = new Resume(UUID_2);
-        assertEquals(storage.get(UUID_2), resume);
+        assertEquals(RESUME_2, storage.get(UUID_2));
     }
 
     @Test(expected = NotExistStorageException.class)

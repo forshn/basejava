@@ -55,7 +55,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     protected abstract void offsetArray(int index);
 
-    protected abstract Integer getIndexOrKey(String uuid);
+    protected abstract Integer getSearchedKey(String uuid);
 
     protected abstract void insertResume(Resume r, int index);
 }
