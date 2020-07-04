@@ -14,22 +14,22 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected Object getResume(String uuid) {
+    protected Object getIndexOrKey(String uuid) {
         return map.get(uuid);
     }
 
     @Override
-    protected void updating(Resume r, Object resume) {
+    protected void doUpdate(Resume r, Object resume) {
         map.replace(r.getUuid(), r);
     }
 
     @Override
-    protected void saving(Resume r, Object resume) {
+    protected void doSave(Resume r, Object resume) {
         map.put(r.getUuid(), r);
     }
 
     @Override
-    protected void deleting(Object resume) {
+    protected void doDelete(Object resume) {
         map.remove(resume.toString());
     }
 
@@ -40,8 +40,7 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     public Resume[] getAll() {
-        Resume r[] = map.values().toArray(new Resume[map.size()]);
-        return r;
+        return map.values().toArray(new Resume[map.size()]);
     }
 
     @Override
@@ -50,7 +49,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume getting(Object resume) {
+    protected Resume doGet(Object resume) {
         return map.get(resume.toString());
     }
 }

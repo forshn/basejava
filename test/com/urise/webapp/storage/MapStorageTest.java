@@ -14,6 +14,7 @@ public class MapStorageTest extends AbstractStorageTest {
     public void getAll() throws Exception {
         Resume[] actualResumes = storage.getAll();
         assertEquals(3, actualResumes.length);
+
     }
 }
 

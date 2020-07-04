@@ -7,52 +7,50 @@ import com.urise.webapp.model.Resume;
 public abstract class AbstractStorage implements Storage {
 
     public void update(Resume r) {
-        Object resume = existingResume(r.getUuid());
-        updating(r, resume);
+        Object resume = getExistingResume(r.getUuid());
+        doUpdate(r, resume);
     }
 
     public void save(Resume r) {
-        Object resume = nonexistentResume(r.getUuid());
-        saving(r, resume);
+        Object resume = getNotExistingResume(r.getUuid());
+        doSave(r, resume);
     }
 
      public void delete(String uuid) {
-        Object resume = existingResume(uuid);
-        deleting(resume);
+        Object resume = getExistingResume(uuid);
+        doDelete(resume);
     }
 
     public Resume get(String uuid) {
-        Object resume = existingResume(uuid);
-        return getting(resume);
+        Object resume = getExistingResume(uuid);
+        return doGet(resume);
     }
 
     protected abstract boolean isExist(Object index);
 
-    private Object existingResume(String uuid) {
-        Object resume = getResume(uuid);
+    private Object getExistingResume(String uuid) {
+        Object resume = getIndexOrKey(uuid);
         if (!isExist(resume)) {
             throw new NotExistStorageException(uuid);
         }
         return resume;
     }
 
-    private Object nonexistentResume(String uuid) {
-        Object resume = getResume(uuid);
+    private Object getNotExistingResume(String uuid) {
+        Object resume = getIndexOrKey(uuid);
         if (isExist(resume)) {
             throw new ExistStorageException(uuid);
         }
         return resume;
     }
 
-    protected abstract Object getResume(String uuid);
+    protected abstract Object getIndexOrKey(String uuid);
 
-    protected abstract void updating(Resume r, Object resume);
+    protected abstract void doUpdate(Resume r, Object resume);
 
-    protected abstract void saving(Resume r, Object resume);
+    protected abstract void doSave(Resume r, Object resume);
 
-    protected abstract void deleting(Object resume);
+    protected abstract void doDelete(Object resume);
 
-    public abstract void clear();
-
-    protected abstract Resume getting(Object resume);
+    protected abstract Resume doGet(Object resume);
 }
