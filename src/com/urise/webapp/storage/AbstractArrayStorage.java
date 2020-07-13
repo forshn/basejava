@@ -16,7 +16,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size = 0;
     }
 
-
     @Override
     public void doUpdate(Resume resume, Object index) {
         storage[(int) index] = resume;

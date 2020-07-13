@@ -9,18 +9,9 @@ public class Resume implements Comparable<Resume>{
     private final String uuid;
     private final String fullName;
 
-
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }
-
-    @Override
-    public int compareTo(Resume o) {
-        int compare = fullName.compareTo(o.fullName);
-        if (compare == 0) return uuid.compareTo(o.uuid);
-        return compare;
-    }
-
 
     public Resume(String uuid, String fullName) {
         this.uuid = uuid;
@@ -29,6 +20,13 @@ public class Resume implements Comparable<Resume>{
 
     public String getUuid() {
         return uuid;
+    }
+
+    @Override
+    public int compareTo(Resume o) {
+        int compare = fullName.compareTo(o.fullName);
+        if (compare == 0) return uuid.compareTo(o.uuid);
+        return compare;
     }
 
     @Override
