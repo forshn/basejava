@@ -1,13 +1,15 @@
 package com.urise.webapp.model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Resume implements Comparable<Resume> {
+public class Resume implements Comparable<Resume>, Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final String uuid;
     private final String fullName;
 
-    private final Map<SectionType, AbstractSection> section = new EnumMap<>(SectionType.class);
+    private final Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
     private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
 
     public Resume(String fullName) {
@@ -20,11 +22,11 @@ public class Resume implements Comparable<Resume> {
     }
 
     public AbstractSection getSection(SectionType type) {
-        return section.get(type);
+        return sections.get(type);
     }
 
-    public void addSection(SectionType type, AbstractSection sections) {
-        section.put(type, sections);
+    public void addSection(SectionType type, AbstractSection section) {
+        sections.put(type, section);
     }
 
     public String getContacts(ContactType type) {
@@ -51,7 +53,7 @@ public class Resume implements Comparable<Resume> {
         final StringBuilder sb = new StringBuilder("Resume{");
         sb.append("№ ").append(uuid).append('\'');
         sb.append("Имя: ").append(fullName).append('\'');
-        sb.append(" ").append(section);
+        sb.append(" ").append(sections);
         sb.append(" ").append(contacts);
         sb.append('}');
         return sb.toString();
@@ -64,12 +66,12 @@ public class Resume implements Comparable<Resume> {
         Resume resume = (Resume) o;
         return Objects.equals(uuid, resume.uuid) &&
                 Objects.equals(fullName, resume.fullName) &&
-                Objects.equals(section, resume.section) &&
+                Objects.equals(sections, resume.sections) &&
                 Objects.equals(contacts, resume.contacts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, fullName, section, contacts);
+        return Objects.hash(uuid, fullName, sections, contacts);
     }
 }

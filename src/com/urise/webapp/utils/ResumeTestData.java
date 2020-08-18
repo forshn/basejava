@@ -11,7 +11,7 @@ import static com.urise.webapp.model.SectionType.*;
 
 public class ResumeTestData {
 
-    public static Resume getResume(String uuid){
+    public static Resume getResume(String uuid, String fullname){
         Resume resume = new Resume(uuid, "Nikolay");
         resume.addContact(TEL, "+7(921) 855-0482");
         resume.addContact(SKYPE, "grigory.kislin");
@@ -75,7 +75,7 @@ public class ResumeTestData {
     }
 
     public static void main(String[] args) {
-        Resume resume = getResume("1");
+        Resume resume = getResume("1", "Nikolay");
         System.out.println(resume);
     }
 }
