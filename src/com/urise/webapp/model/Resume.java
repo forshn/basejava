@@ -1,15 +1,33 @@
 package com.urise.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.*;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final String uuid;
-    private final String fullName;
+    private String uuid;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    private String fullName;
+
+    public Resume() {
+    }
 
     private final Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
+
+    public Map<ContactType, String> getContacts() {
+        return contacts;
+    }
+
     private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
 
     public Resume(String fullName) {

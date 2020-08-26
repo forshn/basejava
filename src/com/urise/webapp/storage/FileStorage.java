@@ -41,15 +41,31 @@ public class FileStorage extends AbstractStorage<File> {
 
     @Override
     protected List<Resume> doGetAll() {
-        File[] files = directory.listFiles();
-        if (files == null) {
-            throw new StorageException("Read error", null);
-        }
-        List<Resume> list = new ArrayList<>(files.length);
-        for (File file : files) {
+        List<Resume> list = new ArrayList<>(getFilesArray().length);
+        for (File file : getFilesArray()) {
             list.add(doGet(file));
         }
         return list;
+    }
+
+    @Override
+    public void clear() {
+        if (getFilesArray() != null) {
+            for (File file : getFilesArray()) {
+                doDelete(file);
+            }
+        }
+    }
+
+    @Override
+    public int size() {
+        return getFilesArray().length;
+    }
+
+    private File[] getFilesArray(){
+        if (directory.listFiles() == null) {
+            throw new StorageException("Error: can't read directory");
+        } else return  directory.listFiles();
     }
 
     @Override
@@ -65,6 +81,7 @@ public class FileStorage extends AbstractStorage<File> {
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
+        doUpdate(resume, file);
     }
 
     @Override
@@ -81,25 +98,6 @@ public class FileStorage extends AbstractStorage<File> {
         } catch (IOException e) {
             throw new StorageException("Read error", file.getName(), e);
         }
-    }
-
-    @Override
-    public void clear() {
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                doDelete(file);
-            }
-        }
-    }
-
-    @Override
-    public int size() {
-        String[] list = directory.list();
-        if (list == null) {
-            throw new StorageException("Directory read error", null);
-        }
-        return list.length;
     }
 }
 

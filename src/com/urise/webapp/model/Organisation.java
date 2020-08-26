@@ -1,15 +1,24 @@
 package com.urise.webapp.model;
 
+import com.urise.webapp.utils.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organisation implements Serializable {
     private static final long serialVersionUID = 1L;
-    private final Link website;
-    private final List<Position> positionList;
+    private Link website;
+    private List<Position> positionList;
+
+    public Organisation() {
+    }
 
     public Organisation(Link website, List<Position> positionList) {
         this.positionList = positionList;
@@ -35,7 +44,7 @@ public class Organisation implements Serializable {
     }
 
     @Override
-    public String  toString() {
+    public String toString() {
         final StringBuilder sb = new StringBuilder("Organisation{");
         sb.append("website=").append(website);
         sb.append(", ").append(positionList);
@@ -43,12 +52,19 @@ public class Organisation implements Serializable {
         return sb.toString();
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
         private static final long serialVersionUID = 1L;
-        private final String title;
-        private final String description;
-        private final LocalDate startDate;
-        private final LocalDate endDate;
+        private String title;
+        private String description;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate startDate;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+
+        private LocalDate endDate;
+
+        public Position() {
+        }
 
         public Position(LocalDate startDate, LocalDate endDate, String title, String description) {
             Objects.requireNonNull(startDate, "start date mustn't be null");
