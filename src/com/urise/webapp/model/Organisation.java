@@ -20,6 +20,10 @@ public class Organisation implements Serializable {
     public Organisation() {
     }
 
+    public Link getWebsite() {
+        return website;
+    }
+
     public Organisation(Link website, List<Position> positionList) {
         this.positionList = positionList;
         this.website = website;
@@ -52,6 +56,10 @@ public class Organisation implements Serializable {
         return sb.toString();
     }
 
+    public List<Position> getPositionList() {
+        return positionList;
+    }
+
     @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
         private static final long serialVersionUID = 1L;
@@ -64,6 +72,18 @@ public class Organisation implements Serializable {
         private LocalDate endDate;
 
         public Position() {
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public LocalDate getStartDate() {
+            return startDate;
+        }
+
+        public LocalDate getEndDate() {
+            return endDate;
         }
 
         public Position(LocalDate startDate, LocalDate endDate, String title, String description) {
@@ -79,6 +99,8 @@ public class Organisation implements Serializable {
         public String getTitle() {
             return title;
         }
+
+
 
         @Override
         public boolean equals(Object o) {

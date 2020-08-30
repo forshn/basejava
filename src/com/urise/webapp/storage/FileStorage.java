@@ -26,29 +26,6 @@ public class FileStorage extends AbstractStorage<File> {
     }
 
     @Override
-    protected File getSearchedKey(String uuid) {
-        return new File(directory, uuid);
-    }
-
-    @Override
-    protected void doUpdate(Resume resume, File file) {
-        try {
-            streamSerializer.doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
-        } catch (IOException e) {
-            throw new StorageException("IO Error", resume.getUuid(), e);
-        }
-    }
-
-    @Override
-    protected List<Resume> doGetAll() {
-        List<Resume> list = new ArrayList<>(getFilesArray().length);
-        for (File file : getFilesArray()) {
-            list.add(doGet(file));
-        }
-        return list;
-    }
-
-    @Override
     public void clear() {
         if (getFilesArray() != null) {
             for (File file : getFilesArray()) {
@@ -62,26 +39,39 @@ public class FileStorage extends AbstractStorage<File> {
         return getFilesArray().length;
     }
 
-    private File[] getFilesArray(){
-        if (directory.listFiles() == null) {
-            throw new StorageException("Error: can't read directory");
-        } else return  directory.listFiles();
+    @Override
+    protected File getSearchedKey(String uuid) {
+        return new File(directory, uuid);
+    }
+
+    @Override
+    protected List<Resume> doGetAll() {
+        List<Resume> list = new ArrayList<>(getFilesArray().length);
+        for (File file : getFilesArray()) {
+            list.add(doGet(file));
+        }
+        return list;
+    }
+
+    @Override
+    protected void doSave(Resume resume, File file) {
+        if (file.exists()){
+            throw new StorageException("File is already exists", resume.getUuid());
+        } else doUpdate(resume, file);
+    }
+
+    @Override
+    protected void doUpdate(Resume resume, File file) {
+        try {
+            streamSerializer.doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
+        } catch (IOException e) {
+            throw new StorageException("IO Error", resume.getUuid(), e);
+        }
     }
 
     @Override
     protected boolean isExist(File file) {
         return file.exists();
-    }
-
-    @Override
-    protected void doSave(Resume resume, File file) {
-        try {
-            file.createNewFile();
-            streamSerializer.doWrite(resume, new FileOutputStream(file));
-        } catch (IOException e) {
-            throw new StorageException("IO error", file.getName(), e);
-        }
-        doUpdate(resume, file);
     }
 
     @Override
@@ -97,6 +87,14 @@ public class FileStorage extends AbstractStorage<File> {
             return streamSerializer.doRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("Read error", file.getName(), e);
+        }
+    }
+
+    private File[] getFilesArray() {
+        try {
+            return directory.listFiles();
+        } catch (NullPointerException e) {
+            throw new StorageException("Directory read error", e);
         }
     }
 }
