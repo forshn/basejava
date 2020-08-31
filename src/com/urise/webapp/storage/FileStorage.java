@@ -94,7 +94,7 @@ public class FileStorage extends AbstractStorage<File> {
         try {
             return directory.listFiles();
         } catch (NullPointerException e) {
-            throw new StorageException("Directory read error", e);
+            throw new StorageException("Directory is empty", e);
         }
     }
 }
