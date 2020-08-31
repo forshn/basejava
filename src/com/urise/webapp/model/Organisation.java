@@ -20,6 +20,14 @@ public class Organisation implements Serializable {
     public Organisation() {
     }
 
+    public List<Position> getPositionList() {
+        return positionList;
+    }
+
+    public Link getWebsite() {
+        return website;
+    }
+
     public Organisation(Link website, List<Position> positionList) {
         this.positionList = positionList;
         this.website = website;
@@ -64,6 +72,18 @@ public class Organisation implements Serializable {
         private LocalDate endDate;
 
         public Position() {
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public LocalDate getStartDate() {
+            return startDate;
+        }
+
+        public LocalDate getEndDate() {
+            return endDate;
         }
 
         public Position(LocalDate startDate, LocalDate endDate, String title, String description) {
