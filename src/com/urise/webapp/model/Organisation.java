@@ -20,6 +20,10 @@ public class Organisation implements Serializable {
     public Organisation() {
     }
 
+    public List<Position> getPositionList() {
+        return positionList;
+    }
+
     public Link getWebsite() {
         return website;
     }
@@ -54,10 +58,6 @@ public class Organisation implements Serializable {
         sb.append(", ").append(positionList);
         sb.append('}');
         return sb.toString();
-    }
-
-    public List<Position> getPositionList() {
-        return positionList;
     }
 
     @XmlAccessorType(XmlAccessType.FIELD)
@@ -99,8 +99,6 @@ public class Organisation implements Serializable {
         public String getTitle() {
             return title;
         }
-
-
 
         @Override
         public boolean equals(Object o) {
