@@ -22,18 +22,21 @@ public abstract class AbstractStorageTest {
     private final String UUID_2 = "uuid2";
     private final String UUID_3 = "uuid3";
     private final String UUID_4 = "uuid4";
+    private final String UUID_5 = "uuid5";
 
     private final Resume RESUME_1;
     private final Resume RESUME_2;
     private final Resume RESUME_3;
     private final Resume RESUME_4;
+    private final Resume RESUME_5;
 
 
     {
-        RESUME_1 = ResumeTestData.getResume(UUID_1, "Name1");
-        RESUME_2 = ResumeTestData.getResume(UUID_2, "Name2");
-        RESUME_3 = ResumeTestData.getResume(UUID_3, "Name3");
-        RESUME_4 = ResumeTestData.getResume(UUID_4,"Name4");
+        RESUME_1 = ResumeTestData.getResume(UUID_1, "Nikolay");
+        RESUME_2 = ResumeTestData.getResume(UUID_2, "Nikolay");
+        RESUME_3 = ResumeTestData.getResume(UUID_3, "Nikolay");
+        RESUME_4 = ResumeTestData.getResume(UUID_4,"Nikolay");
+        RESUME_5 = ResumeTestData.getResume(UUID_5, "Nikolay");
     }
 
     public AbstractStorageTest(Storage storage) {
@@ -82,7 +85,7 @@ public abstract class AbstractStorageTest {
     public void save() throws Exception {
         storage.save(RESUME_4);
         assertEquals(4, storage.size());
-        assertEquals(RESUME_4, storage.get("uuid4"));
+        assertEquals(RESUME_4, storage.get(UUID_4));
     }
 
     @Test(expected = ExistStorageException.class)
