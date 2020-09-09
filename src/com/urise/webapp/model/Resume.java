@@ -22,16 +22,17 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     private String fullName;
 
+    private final Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+
     public Resume() {
     }
 
-    private final Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
 
     public Map<ContactType, String> getContacts() {
         return contacts;
     }
 
-    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -54,7 +55,7 @@ public class Resume implements Comparable<Resume>, Serializable {
         sections.put(type, section);
     }
 
-    public String getContacts(ContactType type) {
+    public String getContact(ContactType type) {
         return contacts.get(type);
     }
 
@@ -68,9 +69,8 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     @Override
     public int compareTo(Resume o) {
-        int compare = fullName.compareTo(o.fullName);
-        if (compare == 0) return uuid.compareTo(o.uuid);
-        return compare;
+        int result = fullName.compareTo(o.fullName);
+        return result == 0 ? uuid.compareTo(o.uuid) : result;
     }
 
     @Override
@@ -91,8 +91,8 @@ public class Resume implements Comparable<Resume>, Serializable {
         Resume resume = (Resume) o;
         return Objects.equals(uuid, resume.uuid) &&
                 Objects.equals(fullName, resume.fullName) &&
-                Objects.equals(sections, resume.sections) &&
-                Objects.equals(contacts, resume.contacts);
+                Objects.equals(contacts, resume.contacts) &&
+                Objects.equals(sections, resume.sections);
     }
 
     @Override

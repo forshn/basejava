@@ -40,12 +40,12 @@ public class DataStreamSerializer implements StreamSerializer {
                 break;
             case EXPERIENCE:
             case EDUCATION:
-                List<Organisation> Organisations = ((OrganisationSection) section).getOrganisations();
-                writeCollection(dos, Organisations, Organisation -> {
-                    Link homePage = Organisation.getWebsite();
+                List<Organisation> organisations = ((OrganisationSection) section).getOrganisations();
+                writeCollection(dos, organisations, organisation -> {
+                    Link homePage = organisation.getWebsite();
                     dos.writeUTF(homePage.getTitle());
                     dos.writeUTF(homePage.getUrl() == null ? "" : homePage.getUrl());
-                    List<Organisation.Position> positions = Organisation.getPositionList();
+                    List<Organisation.Position> positions = organisation.getPositionList();
                     writeCollection(dos, positions, position -> {
                         writeLocalDate(dos, position.getStartDate());
                         writeLocalDate(dos, position.getEndDate());
@@ -85,7 +85,7 @@ public class DataStreamSerializer implements StreamSerializer {
                 return new ListSection(list);
             case EXPERIENCE:
             case EDUCATION:
-                List<Organisation> Organisations = new ArrayList<>();
+                List<Organisation> organisations = new ArrayList<>();
                 readCollection(dis, () -> {
                     String name = dis.readUTF();
                     String url = dis.readUTF();
@@ -99,9 +99,9 @@ public class DataStreamSerializer implements StreamSerializer {
                         positions.add(new Organisation.Position(startDate, endDate, title, (description.isEmpty() ?
                                 null : description)));
                     });
-                    Organisations.add(new Organisation(new Link(name, url), positions));
+                    organisations.add(new Organisation(new Link(name, url), positions));
                 });
-                return new OrganisationSection(Organisations);
+                return new OrganisationSection(organisations);
         }
         return null;
     }
