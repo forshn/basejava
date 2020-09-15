@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class DataStreamSerializer implements StreamSerializer {
+
+    @Override
     public void doWrite(Resume resume, OutputStream os) throws IOException {
         try (DataOutputStream dos = new DataOutputStream(os)) {
             dos.writeUTF(resume.getUuid());
@@ -29,8 +31,8 @@ public class DataStreamSerializer implements StreamSerializer {
         SectionType type = entry.getKey();
         dos.writeUTF(type.name());
         switch (type) {
-            case OBJECTIVE:
             case PERSONAL:
+            case OBJECTIVE:
                 dos.writeUTF(((ContentSection) section).getText());
                 break;
             case ACHIEVEMENT:
@@ -50,7 +52,7 @@ public class DataStreamSerializer implements StreamSerializer {
                         writeLocalDate(dos, position.getStartDate());
                         writeLocalDate(dos, position.getEndDate());
                         dos.writeUTF(position.getTitle());
-                        dos.writeUTF(position.getDescription() == null ? "" : position.getDescription());
+                        dos.writeUTF(position.getDescription());
                     });
                 });
                 break;
@@ -75,8 +77,8 @@ public class DataStreamSerializer implements StreamSerializer {
 
     private AbstractSection readSection(DataInputStream dis, SectionType sectionType) throws IOException {
         switch (sectionType) {
-            case OBJECTIVE:
             case PERSONAL:
+            case OBJECTIVE:
                 return new ContentSection(dis.readUTF());
             case ACHIEVEMENT:
             case QUALIFICATION:
@@ -96,8 +98,7 @@ public class DataStreamSerializer implements StreamSerializer {
                         LocalDate endDate = readLocalDate(dis.readInt(), dis.readInt());
                         String title = dis.readUTF();
                         String description = dis.readUTF();
-                        positions.add(new Organisation.Position(startDate, endDate, title, (description.isEmpty() ?
-                                null : description)));
+                        positions.add(new Organisation.Position(startDate, endDate, title, description));
                     });
                     organisations.add(new Organisation(new Link(name, url), positions));
                 });
@@ -132,7 +133,7 @@ public class DataStreamSerializer implements StreamSerializer {
 
     private void writeLocalDate(DataOutputStream dos, LocalDate date) throws IOException {
         dos.writeInt(date.getYear());
-        dos.writeInt(date.getMonthValue());
+        dos.writeInt(date.getMonth().getValue());
     }
 
     private LocalDate readLocalDate(int year, int month) {

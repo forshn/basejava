@@ -21,10 +21,6 @@ public class Organisation implements Serializable {
     public Organisation() {
     }
 
-    public List<Position> getPositionList() {
-        return positionList;
-    }
-
     public Link getWebsite() {
         return website;
     }
@@ -34,17 +30,21 @@ public class Organisation implements Serializable {
         this.website = website;
     }
 
-    public Organisation(String name, String url, Position... positions) {
-        this(new Link(name, url), Arrays.asList(positions));
+    public Organisation(String title, String url, Position... positionList) {
+        this(new Link(title, url), Arrays.asList(positionList));
+    }
+
+    public List<Position> getPositionList() {
+        return positionList;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Organisation)) return false;
         Organisation that = (Organisation) o;
-        if (!website.equals(that.website)) return false;
-        return positionList.equals(that.positionList);
+        return Objects.equals(website, that.website) &&
+                Objects.equals(positionList, that.positionList);
     }
 
     @Override
@@ -69,10 +69,19 @@ public class Organisation implements Serializable {
         @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate startDate;
         @XmlJavaTypeAdapter(LocalDateAdapter.class)
-
         private LocalDate endDate;
 
         public Position() {
+        }
+
+        public Position(LocalDate startDate, LocalDate endDate, String title, String description) {
+            Objects.requireNonNull(startDate, "start date mustn't be null");
+            Objects.requireNonNull(endDate, "end date mustn't be null");
+            Objects.requireNonNull(title, "title date mustn't be null");
+            this.title = title;
+            this.description = description  == null ? "" : description;
+            this.startDate = startDate;
+            this.endDate = endDate;
         }
 
         public String getDescription() {
@@ -87,16 +96,6 @@ public class Organisation implements Serializable {
             return endDate;
         }
 
-        public Position(LocalDate startDate, LocalDate endDate, String title, String description) {
-            Objects.requireNonNull(startDate, "start date mustn't be null");
-            Objects.requireNonNull(endDate, "end date mustn't be null");
-            Objects.requireNonNull(title, "title date mustn't be null");
-            this.title = title;
-            this.description = description;
-            this.startDate = startDate;
-            this.endDate = endDate;
-        }
-
         public String getTitle() {
             return title;
         }
@@ -104,12 +103,12 @@ public class Organisation implements Serializable {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (!(o instanceof Position)) return false;
             Position position = (Position) o;
-            return Objects.equals(title, position.title) &&
+            return title.equals(position.title) &&
                     Objects.equals(description, position.description) &&
-                    Objects.equals(startDate, position.startDate) &&
-                    Objects.equals(endDate, position.endDate);
+                    startDate.equals(position.startDate) &&
+                    endDate.equals(position.endDate);
         }
 
         @Override

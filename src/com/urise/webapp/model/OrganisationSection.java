@@ -1,17 +1,23 @@
 package com.urise.webapp.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class OrganisationSection extends AbstractSection {
     private static final long serialVersionUID = 1L;
+
     private List<Organisation> organisations;
 
     public OrganisationSection() {
     }
 
+    public OrganisationSection(Organisation... organizations) {
+        this(Arrays.asList(organizations));
+    }
+
     public OrganisationSection(List<Organisation> organisations) {
-        Objects.requireNonNull(organisations, "content must not be null");
+        Objects.requireNonNull(organisations, "organisation must not be null");
         this.organisations = organisations;
     }
 
@@ -24,7 +30,7 @@ public class OrganisationSection extends AbstractSection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrganisationSection that = (OrganisationSection) o;
-        return Objects.equals(organisations, that.organisations);
+        return organisations.equals(that.organisations);
     }
 
     @Override
