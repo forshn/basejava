@@ -2,7 +2,7 @@ package com.urise.webapp.utils;
 
 public class Deadlock {
     private final static String STRING1 = "TEST";
-    private final static String STRING2 = "TEST";
+    private final static String STRING2 = "TEST1";
 
     public static void main(String[] args) {
 
@@ -12,6 +12,7 @@ public class Deadlock {
 
         thread1.start();
         thread2.start();
+
     }
 
     private static void printStringsFromThreads(String string1, String string2) {
