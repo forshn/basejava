@@ -5,14 +5,11 @@ public class Deadlock {
     private final static String STRING2 = "TEST1";
 
     public static void main(String[] args) {
-
         Thread thread1 = new Thread(() -> printStringsFromThreads(STRING1, STRING2));
-
         Thread thread2 = new Thread(() -> printStringsFromThreads(STRING2, STRING1));
 
         thread1.start();
         thread2.start();
-
     }
 
     private static void printStringsFromThreads(String string1, String string2) {
