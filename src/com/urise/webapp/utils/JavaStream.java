@@ -11,7 +11,7 @@ public class JavaStream {
         int[] array = new int[]{9, 8, 8, 7, 5, 4, 3, 3, 2, 1, 0};
         System.out.println(minValue(array));
 
-        ArrayList<Integer> integers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 7, 8, 8, 9, 1, 2, 4, 4));
+        ArrayList<Integer> integers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 7, 8, 8, 9, 1, 2, 4, 5));
         System.out.println(oddOrEven(integers).toString());
     }
 
@@ -26,6 +26,6 @@ public class JavaStream {
                 .mapToInt(a -> a)
                 .sum();
         System.out.println("Сумма чисел коллекции = " + sum);
-        return integers.stream().filter(a -> (a % 2) == sum % 2).distinct().collect(Collectors.toList());
+        return integers.stream().filter(a -> (a % 2) != sum % 2).distinct().collect(Collectors.toList());
     }
 }
