@@ -16,9 +16,16 @@ public class JavaStream {
     }
 
     public static int minValue(int[] values) {
-        return Arrays.stream(values)
+        int result = 0;
+        int num = (Arrays.stream(values)
                 .distinct()
-                .reduce(0, (a, b) -> (a + b * (int) (a == 0 ? 1 : Math.pow(10, (int) (Math.log10(a) + 1)))));
+                .reduce(0, (a, b) -> 10 * a + b));
+        while (num != 0) {
+            int digit = num % 10;
+            result = result * 10 + digit;
+            num /= 10;
+        }
+        return result;
     }
 
     public static List<Integer> oddOrEven(List<Integer> integers) {
