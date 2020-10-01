@@ -33,6 +33,6 @@ public class JavaStream {
                 .mapToInt(a -> a)
                 .sum();
         System.out.println("Сумма чисел коллекции = " + sum);
-        return integers.stream().filter(a -> (a % 2) != sum % 2).distinct().collect(Collectors.toList());
+        return integers.stream().filter(a -> (a % 2) != sum % 2).collect(Collectors.toList());
     }
 }
