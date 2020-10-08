@@ -16,7 +16,6 @@ import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
     protected final static File STORAGE_DIR = Config.get().getStorageDir();
-
     protected Storage storage;
 
     private final String UUID_1 = "uuid1";
@@ -36,7 +35,7 @@ public abstract class AbstractStorageTest {
         RESUME_1 = ResumeTestData.getResume(UUID_1, "Nikolay");
         RESUME_2 = ResumeTestData.getResume(UUID_2, "Nikolay");
         RESUME_3 = ResumeTestData.getResume(UUID_3, "Nikolay");
-        RESUME_4 = ResumeTestData.getResume(UUID_4,"Nikolay");
+        RESUME_4 = ResumeTestData.getResume(UUID_4, "Nikolay");
         RESUME_5 = ResumeTestData.getResume(UUID_5, "Nikolay");
     }
 
