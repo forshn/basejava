@@ -13,7 +13,7 @@ public class ResumeTestData {
 
     public static Resume getResume(String uuid, String fullname) {
         Resume resume = new Resume(uuid, "Nikolay");
-        resume.addContact(TEL, "+7(921) 855-0482");
+       /* resume.addContact(TEL, "+7(921) 855-0482");
         resume.addContact(SKYPE, "grigory.kislin");
         resume.addContact(MAIL, "gkislin@yandex.ru");
         resume.addContact(LINKEDIN, "https://www.linkedin.com/in/gkislin");
@@ -69,7 +69,7 @@ public class ResumeTestData {
         education.add(new Organisation("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366", new Organisation.Position(LocalDate.of(2011, 3, 1), LocalDate.of(2011, 5, 1), "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.", null)));
 
 
-        resume.addSection(EDUCATION, new OrganisationSection(education));
+        resume.addSection(EDUCATION, new OrganisationSection(education));*/
 
         return resume;
     }
