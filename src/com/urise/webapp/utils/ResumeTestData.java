@@ -75,7 +75,7 @@ public class ResumeTestData {
     }
 
     public static void main(String[] args) {
-        Resume resume = getResume("uuid1", "Nikolay");
+        Resume resume = getResume("uuid1                               ", "Nikolay");
         System.out.println(resume);
     }
 }

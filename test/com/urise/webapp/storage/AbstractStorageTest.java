@@ -2,6 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
+import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 import com.urise.webapp.utils.Config;
 import com.urise.webapp.utils.ResumeTestData;
@@ -11,6 +12,7 @@ import org.junit.Test;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,11 +20,11 @@ public abstract class AbstractStorageTest {
     protected final static File STORAGE_DIR = Config.get().getStorageDir();
     protected Storage storage;
 
-    private final String UUID_1 = "uuid1                               ";
-    private final String UUID_2 = "uuid2                               ";
-    private final String UUID_3 = "uuid3                               ";
-    private final String UUID_4 = "uuid4                               ";
-    private final String UUID_5 = "uuid5                               ";
+    private final String UUID_1 = UUID.randomUUID().toString();
+    private final String UUID_2 = UUID.randomUUID().toString();
+    private final String UUID_3 = UUID.randomUUID().toString();
+    private final String UUID_4 = UUID.randomUUID().toString();
+    private final String UUID_5 = UUID.randomUUID().toString();
 
     private final Resume RESUME_1;
     private final Resume RESUME_2;
@@ -32,11 +34,11 @@ public abstract class AbstractStorageTest {
 
 
     {
-        RESUME_1 = ResumeTestData.getResume(UUID_1, "Nikolay");
-        RESUME_2 = ResumeTestData.getResume(UUID_2, "Nikolay");
-        RESUME_3 = ResumeTestData.getResume(UUID_3, "Nikolay");
-        RESUME_4 = ResumeTestData.getResume(UUID_4, "Nikolay");
-        RESUME_5 = ResumeTestData.getResume(UUID_5, "Nikolay");
+        RESUME_1 = ResumeTestData.getResume(UUID_1, "Name1");
+        RESUME_2 = ResumeTestData.getResume(UUID_2, "Name2");
+        RESUME_3 = ResumeTestData.getResume(UUID_3, "Name3");
+        RESUME_4 = ResumeTestData.getResume(UUID_4, "Name4");
+        RESUME_5 = ResumeTestData.getResume(UUID_5, "Name5");
     }
 
     public AbstractStorageTest(Storage storage) {
