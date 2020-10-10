@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,21 +25,17 @@ public abstract class AbstractStorageTest {
     private final String UUID_2 = UUID.randomUUID().toString();
     private final String UUID_3 = UUID.randomUUID().toString();
     private final String UUID_4 = UUID.randomUUID().toString();
-    private final String UUID_5 = UUID.randomUUID().toString();
 
     private final Resume RESUME_1;
     private final Resume RESUME_2;
     private final Resume RESUME_3;
     private final Resume RESUME_4;
-    private final Resume RESUME_5;
-
 
     {
         RESUME_1 = ResumeTestData.getResume(UUID_1, "Name1");
         RESUME_2 = ResumeTestData.getResume(UUID_2, "Name2");
         RESUME_3 = ResumeTestData.getResume(UUID_3, "Name3");
         RESUME_4 = ResumeTestData.getResume(UUID_4, "Name4");
-        RESUME_5 = ResumeTestData.getResume(UUID_5, "Name5");
     }
 
     public AbstractStorageTest(Storage storage) {
@@ -78,9 +75,11 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAllSorted() throws Exception {
-        List<Resume> expectedResumes = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
-        assertEquals(3, expectedResumes.size());
-        assertEquals(expectedResumes, storage.getAllSorted());
+        List<Resume> list = storage.getAllSorted();
+        assertEquals(3, list.size());
+        List<Resume> sortedResumes = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
+        Collections.sort(sortedResumes);
+        assertEquals(list, sortedResumes);
     }
 
     @Test
@@ -90,7 +89,7 @@ public abstract class AbstractStorageTest {
         assertEquals(RESUME_4, storage.get(UUID_4));
     }
 
-    @Test(expected = ExistStorageException.class)
+    @Test(expected = StorageException.class)
     public void saveExistingResume() throws Exception {
         storage.save(new Resume(UUID_2, "Angela"));
     }
