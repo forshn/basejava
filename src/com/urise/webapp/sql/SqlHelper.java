@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class SqlHelper {
     public final ConnectionFactory connectionFactory;
-    private static final String POSTEGRESQL_DUPLICATE_PK = "505050";
+    private static final String POSTEGRESQL_DUPLICATE_PK = "23505";
 
     public SqlHelper(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
