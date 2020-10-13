@@ -2,7 +2,6 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.sql.ConnectionFactory;
 import com.urise.webapp.sql.SqlHelper;
 
 import java.sql.*;
@@ -11,11 +10,10 @@ import java.util.List;
 
 public class SqlStorage implements Storage {
     public final SqlHelper sqlHelper;
-    public final ConnectionFactory connectionFactory;
+
 
     public SqlStorage(String dbUrl, String dbUser, String dbPassword) {
         sqlHelper = new SqlHelper(() -> DriverManager.getConnection(dbUrl, dbUser, dbPassword));
-        connectionFactory = () -> DriverManager.getConnection(dbUrl, dbUser, dbPassword);
     }
 
     @Override
@@ -83,12 +81,8 @@ public class SqlStorage implements Storage {
     @Override
     public int size() {
         return sqlHelper.makeExecution("SELECT COUNT(*) FROM resume", ps -> {
-            int size = 0;
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                size = rs.getInt(1);
-            }
-            return size;
+            return rs.next() ? rs.getInt(1) : 0;
         });
     }
 }
