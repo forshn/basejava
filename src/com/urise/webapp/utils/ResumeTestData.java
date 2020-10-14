@@ -13,7 +13,7 @@ public class ResumeTestData {
 
     public static Resume getResume(String uuid, String fullname) {
         Resume resume = new Resume(uuid, "Nikolay");
-       /* resume.addContact(TEL, "+7(921) 855-0482");
+        resume.addContact(TEL, "+7(921) 855-0482");
         resume.addContact(SKYPE, "grigory.kislin");
         resume.addContact(MAIL, "gkislin@yandex.ru");
         resume.addContact(LINKEDIN, "https://www.linkedin.com/in/gkislin");
@@ -21,7 +21,7 @@ public class ResumeTestData {
         resume.addContact(STACKOVERFLOW, "https://stackoverflow.com/users/548473");
         resume.addContact(WEBSITE, "http://gkislin.ru/");
 
-        resume.addSection(OBJECTIVE, new ContentSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям\n"));
+      /*  resume.addSection(OBJECTIVE, new ContentSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям\n"));
         resume.addSection(PERSONAL, new ContentSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры.\n"));
 
         List<String> achievements = new ArrayList<>();
