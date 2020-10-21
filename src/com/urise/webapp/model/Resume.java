@@ -32,7 +32,6 @@ public class Resume implements Comparable<Resume>, Serializable {
         return contacts;
     }
 
-
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }
@@ -76,24 +75,23 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Resume{");
-        sb.append("№ ").append(uuid).append('\'');
-        sb.append("Имя: ").append(fullName).append('\'');
-        sb.append(" ").append(sections);
-        sb.append(" ").append(contacts);
-        sb.append('}');
-        return sb.toString();
+        return "Resume{" +
+                "uuid='" + uuid + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", sections=" + sections +
+                ", contacts=" + contacts +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Resume)) return false;
         Resume resume = (Resume) o;
         return Objects.equals(uuid, resume.uuid) &&
                 Objects.equals(fullName, resume.fullName) &&
-                Objects.equals(contacts, resume.contacts) &&
-                Objects.equals(sections, resume.sections);
+                Objects.equals(sections, resume.sections) &&
+                Objects.equals(contacts, resume.contacts);
     }
 
     @Override

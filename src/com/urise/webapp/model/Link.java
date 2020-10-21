@@ -44,10 +44,6 @@ public class Link implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Link{");
-        sb.append("title='").append(title).append('\'');
-        sb.append(", url='").append(url).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return title + url;
     }
 }

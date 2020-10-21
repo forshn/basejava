@@ -15,9 +15,14 @@ public class ContentSection extends AbstractSection {
     }
 
     @Override
+    public String toString() {
+        return text;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof ContentSection)) return false;
         ContentSection that = (ContentSection) o;
         return Objects.equals(text, that.text);
     }
@@ -25,14 +30,6 @@ public class ContentSection extends AbstractSection {
     @Override
     public int hashCode() {
         return Objects.hash(text);
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("ContentSection{");
-        sb.append("text='").append(text).append('\'');
-        sb.append('}');
-        return sb.toString();
     }
 
     public String getText() {
