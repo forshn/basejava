@@ -1,5 +1,6 @@
 package com.urise.webapp.model;
 
+import java.sql.Connection;
 import java.util.Objects;
 
 public class ContentSection extends AbstractSection {
@@ -22,9 +23,9 @@ public class ContentSection extends AbstractSection {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ContentSection)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         ContentSection that = (ContentSection) o;
-        return Objects.equals(text, that.text);
+        return text.equals(that.text);
     }
 
     @Override
