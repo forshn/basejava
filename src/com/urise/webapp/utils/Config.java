@@ -43,7 +43,7 @@ public class Config {
         String prop = System.getProperty("homeDir");
         File homeDir = new File(prop == null ? "." : prop);
         if (!homeDir.isDirectory()) {
-            throw new IllegalStateException(homeDir + " is not directory");
+            throw new IllegalStateException(homeDir + " doesn't exist");
         }
         return homeDir;
     }
