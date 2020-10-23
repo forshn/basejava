@@ -134,9 +134,9 @@ public class SqlStorage implements Storage {
         });
     }
 
-    private void deleteContacts(Resume r, Connection conn) throws SQLException {
+    private void deleteContacts(Resume resume, Connection conn) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement("DELETE  FROM contact WHERE resume_uuid=?")) {
-            ps.setString(1, r.getUuid());
+            ps.setString(1, resume.getUuid());
             ps.execute();
         }
     }
@@ -183,9 +183,20 @@ public class SqlStorage implements Storage {
         try (PreparedStatement ps = conn.prepareStatement("INSERT INTO section (resume_uuid, type, value) VALUES (?," +
                 "?,?)")) {
             for (Map.Entry<SectionType, AbstractSection> e : resume.getSections().entrySet()) {
+                AbstractSection section = e.getValue();
                 ps.setString(1, resume.getUuid());
                 ps.setString(2, e.getKey().name());
-                ps.setString(3, e.getValue().toString());
+                switch (e.getKey()) {
+                    case OBJECTIVE:
+                    case PERSONAL:
+                        ps.setString(3, ((ContentSection) section).getText());
+                        break;
+                    case ACHIEVEMENT:
+                    case QUALIFICATION:
+                        List<String> list = ((ListSection) section).getContent();
+                        ps.setString(3, String.join("\n", list));
+                        break;
+                }
                 ps.addBatch();
             }
             ps.executeBatch();
@@ -193,7 +204,7 @@ public class SqlStorage implements Storage {
     }
 
     private void deleteSections(Resume resume, Connection conn) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("DELETE FROM contact WHERE resume_uuid=?")) {
+        try (PreparedStatement ps = conn.prepareStatement("DELETE  FROM section WHERE resume_uuid=?")) {
             ps.setString(1, resume.getUuid());
             ps.execute();
         }
