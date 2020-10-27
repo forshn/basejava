@@ -6,6 +6,7 @@ import java.util.Objects;
 public class ContentSection extends AbstractSection {
     private static final long serialVersionUID = 1L;
     private String text;
+    public static final ContentSection EMPTY = new ContentSection("");
 
     public ContentSection() {
     }

@@ -17,6 +17,7 @@ public class Organisation implements Serializable {
     private static final long serialVersionUID = 1L;
     private Link website;
     private List<Position> positionList = new ArrayList<>();
+    public static final Organisation EMPTY = new Organisation("", "", Position.EMPTY);
 
     public Organisation() {
     }
@@ -70,6 +71,7 @@ public class Organisation implements Serializable {
         private LocalDate startDate;
         @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate endDate;
+        public static final Position EMPTY = new Position();
 
         public Position() {
         }

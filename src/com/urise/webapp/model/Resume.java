@@ -13,7 +13,6 @@ import java.util.UUID;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
     private static final long serialVersionUID = 1L;
-
     private String uuid;
 
     public String getFullName() {
@@ -21,6 +20,17 @@ public class Resume implements Comparable<Resume>, Serializable {
     }
 
     private String fullName;
+
+    public static final Resume EMPTY = new Resume();
+
+    static {
+        EMPTY.setSection(SectionType.OBJECTIVE, ContentSection.EMPTY);
+        EMPTY.setSection(SectionType.PERSONAL, ContentSection.EMPTY);
+        EMPTY.setSection(SectionType.ACHIEVEMENT, ListSection.EMPTY);
+        EMPTY.setSection(SectionType.QUALIFICATION, ListSection.EMPTY);
+        EMPTY.setSection(SectionType.EXPERIENCE, new OrganisationSection(Organisation.EMPTY));
+        EMPTY.setSection(SectionType.EDUCATION, new OrganisationSection(Organisation.EMPTY));
+    }
 
     private final Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
     private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
@@ -40,10 +50,6 @@ public class Resume implements Comparable<Resume>, Serializable {
         Objects.requireNonNull(uuid, "uuid must not be null");
         Objects.requireNonNull(fullName, "fullName must not be null");
         this.uuid = uuid;
-        this.fullName = fullName;
-    }
-
-    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
@@ -69,6 +75,18 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     public String getUuid() {
         return uuid;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setContact(ContactType type, String value) {
+        contacts.put(type, value);
+    }
+
+    public void setSection(SectionType type, AbstractSection section) {
+        sections.put(type, section);
     }
 
     @Override

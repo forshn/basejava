@@ -1,5 +1,6 @@
 package com.urise.webapp.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,7 +8,13 @@ public class ListSection extends AbstractSection {
     private static final long serialVersionUID = 1L;
     private List<String> content;
 
+    public static final ListSection EMPTY = new ListSection(" ");
+
     public ListSection() {
+    }
+
+    public ListSection(String... items) {
+        this(Arrays.asList(items));
     }
 
     public ListSection(List<String> content) {
