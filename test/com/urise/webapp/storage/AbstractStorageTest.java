@@ -75,18 +75,18 @@ public abstract class AbstractStorageTest {
         List<String> achievements = new ArrayList<>();
 
         achievements.add("Достижения - 1");
-        /*achievements.add("Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.\n");
+        achievements.add("Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.\n");
         achievements.add("Налаживание процесса разработки и непрерывной интеграции ERP системы River BPM. Интеграция с 1С, Bonita BPM, CMIS, LDAP. Разработка приложения управления окружением на стеке: Scala/Play/Anorm/JQuery. Разработка SSO аутентификации и авторизации различных ERP модулей, интеграция CIFS/SMB java сервера.\n");
         achievements.add("Реализация c нуля Rich Internet Application приложения на стеке технологий JPA, Spring, Spring-MVC, GWT, ExtGWT (GXT), Commet, HTML5, Highstock для алгоритмического трейдинга.\n");
         achievements.add("Создание JavaEE фреймворка для отказоустойчивого взаимодействия слабо-связанных сервисов (SOA-base архитектура, JAX-WS, JMS, AS Glassfish). Сбор статистики сервисов и информации о состоянии через систему мониторинга Nagios. Реализация онлайн клиента для администрирования и мониторинга системы по JMX (Jython/ Django).\n");
-        achievements.add("Реализация протоколов по приему платежей всех основных платежных системы России (Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа.\n");*/
+        achievements.add("Реализация протоколов по приему платежей всех основных платежных системы России (Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа.\n");
 
         resume.addSection(ACHIEVEMENT, new ListSection(achievements));
 
         List<String> qualifications = new ArrayList<>();
 
         qualifications.add("Квалификация - 1");
-        /*qualifications.add("Version control: Subversion, Git, Mercury, ClearCase, Perforce\n");
+        qualifications.add("Version control: Subversion, Git, Mercury, ClearCase, Perforce\n");
         qualifications.add("DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle,\n");
         qualifications.add("MySQL, SQLite, MS SQL, HSQLDB\n");
         qualifications.add("Languages: Java, Scala, Python/Jython/PL-Python, JavaScript, Groovy,\n");
@@ -99,7 +99,7 @@ public abstract class AbstractStorageTest {
         qualifications.add("Инструменты: Maven + plugin development, Gradle, настройка Ngnix,\n");
         qualifications.add("администрирование Hudson/Jenkins, Ant + custom task, SoapUI, JPublisher, Flyway, Nagios, iReport, OpenCmis, Bonita, pgBouncer.\n");
         qualifications.add("Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектрирования, архитектурных шаблонов, UML, функционального программирования\n");
-        qualifications.add("Родной русский, английский \"upper intermediate\"\n");*/
+        qualifications.add("Родной русский, английский \"upper intermediate\"\n");
         resume.addSection(QUALIFICATION, new ListSection(qualifications));
         storage.update(resume);
         assertEquals(resume, storage.get(UUID_1));
