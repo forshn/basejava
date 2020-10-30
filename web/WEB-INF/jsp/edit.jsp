@@ -53,7 +53,7 @@
                         </dl>
                         <dl>
                             <dt>Сайт:</dt>
-                            <dd><input type="text" name='${type}url' size=100 value="${org.website.title}"></dd>
+                            <dd><input type="text" name='${type}url' size=100 value="${org.website.url}"></dd>
                             </dd>
                         </dl>
                         <br>
@@ -90,7 +90,7 @@
             </c:choose>
         </c:forEach>
         <button type="submit">Сохранить</button>
-        <button onclick="window.history.back()">Отменить</button>
+        <button onclick="window.history.go(-1)">Отменить</button>
     </form>
 </section>
 <jsp:include page="fragments/footer.jsp"/>

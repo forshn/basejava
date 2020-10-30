@@ -66,7 +66,7 @@
                                         <h3>${org.website.title}</h3>
                                     </c:when>
                                     <c:otherwise>
-                                        <h3><a href="${org.website.url}">${org.website.title}</a></h3>
+                                        <h3><a href="${org.website.url}"target="_blank">${org.website.title} </a></h3>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
