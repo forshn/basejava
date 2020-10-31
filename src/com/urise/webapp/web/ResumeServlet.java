@@ -18,11 +18,16 @@ import java.util.List;
 public class ResumeServlet extends HttpServlet {
     private Storage storage = Config.get().getStorage();
 
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        storage = Config.get().getStorage();
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
-
         final boolean isCreate = (uuid == null || uuid.length() == 0);
         Resume resume;
         if (isCreate) {
