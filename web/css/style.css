@@ -1,45 +1,50 @@
+section {
+    width: 900px;
+    margin: auto;
+}
+
 header {
-    background: none repeat scroll 0 0 #A6C9E2;
-    color: #2E6E9E;
+    background: none repeat scroll 0 0 #33FFEE;
+    color: #59FF33;
     font-size: 20px;
     padding: 5px 20px;
+    text-align: center;
 }
 
 footer {
-    background: none repeat scroll 0 0 #A6C9E2;
-    color: #2E6E9E;
+    background: none repeat scroll 0 0 #33FFEE;
+    color: #59FF33;
     font-size: 20px;
     padding: 5px 20px;
     margin: 20px 0;
+    text-align: center;
 }
 
-table {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif, serif;
-    border-collapse: collapse;
-    color: #686461;
+dl {
+    background: none repeat scroll 0 0 #33FFEE;
+    margin: 8px 0;
+    padding: 0;
 }
-caption {
-    padding: 10px;
-    color: white;
-    background: #8FD4C1;
-    font-size: 18px;
-    text-align: left;
-    font-weight: bold;
+
+dt {
+    display: inline-block;
+    width: 170px;
 }
-th {
-    border-bottom: 3px solid #B9B29F;
-    padding: 10px;
-    text-align: left;
+
+dd {
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: top;
 }
-td {
-    padding: 10px;
+
+h2, h3 {
+    margin: 15px 0 5px;
 }
-tr:nth-child(odd) {
-    background: white;
+
+li {
+    margin: 15px 0;
 }
-tr:nth-child(even) {
-    background: #E8E6D1;
-}
+
 a[href^="skype:"] {
     padding-left: 20px !important;
     background: url(../img/skype.png) no-repeat center left;
