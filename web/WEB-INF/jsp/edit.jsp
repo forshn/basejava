@@ -48,11 +48,11 @@
                     <c:forEach var="org" items="<%=((OrganisationSection) section).getOrganisations()%>"
                                varStatus="counter">
                         <dl>
-                            <dt>Наименование учереждения:</dt>
+                            <dt>Название учереждения:</dt>
                             <dd><input type="text" name='${type}' size=100 value="${org.website.title}"></dd>
                         </dl>
                         <dl>
-                            <dt>Сайт:</dt>
+                            <dt>Сайт учереждения:</dt>
                             <dd><input type="text" name='${type}url' size=100 value="${org.website.url}"></dd>
                             </dd>
                         </dl>
@@ -79,7 +79,7 @@
                                                value="${pos.title}">
                                 </dl>
                                 <dl>
-                                    <dt>Краткое описание:</dt>
+                                    <dt>Описание:</dt>
                                     <dd><textarea name="${type}${counter.index}description" rows=5
                                                   cols=75>${pos.description}</textarea></dd>
                                 </dl>

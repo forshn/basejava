@@ -17,25 +17,25 @@ public enum ContactType {
     LINKEDIN("LinkedIn") {
         @Override
         public String toHtml0(String value) {
-            return toLink(value);
+            return getTitle() + ": " + toLink("https://www.linkedin.com" + value, value);
         }
     },
     GITHUB("Профиль GitHub") {
         @Override
         public String toHtml0(String value) {
-            return toLink(value);
+            return getTitle() + ": " + toLink("github." + value, value);
         }
     },
     STACKOVERFLOW("Профиль Stackoverflow")  {
         @Override
         public String toHtml0(String value) {
-            return toLink(value);
+            return getTitle() + ": " + toLink("https://stackoverflow.com" + value, value);
         }
     },
     WEBSITE("Сайт") {
         @Override
         public String toHtml0(String value) {
-            return toLink(value);
+            return getTitle() + ": " + toLink(value, value);
         }
     };
 
